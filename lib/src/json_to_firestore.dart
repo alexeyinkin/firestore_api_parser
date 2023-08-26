@@ -16,30 +16,12 @@ Map<String, dynamic> toFirestoreDocumentFormat({required Map<String, dynamic> js
 @visibleForTesting
 Map<String, dynamic> getFirestoreRepresentation(dynamic value) {
   if (value is String) {
-    if (value.contains('/') && value.startsWith('projects/')) {
-      return referenceDataRepresentation(value);
-    }
-
-    final date = DateTime.tryParse(value);
-
-    final isDate = date != null;
-
-    if (!isDate) {
-      return stringDataRepresentation(value);
-    }
-
-    if (date!.toIso8601String().endsWith('Z')) {
-      return timestampDataRepresentation(value);
-    }
-
     return stringDataRepresentation(value);
+  } else if (value is DateTime) {
+    return timestampDataRepresentation(value.toIso8601String());
   } else if (value is bool) {
     return boolDataRepresentation(value);
   } else if (value is int) {
-    try {
-      final dateTime = DateTime.parse('$value');
-      return timestampDataRepresentation(dateTime.toIso8601String());
-    } catch (_) {}
     return intDataRepresentation(value);
   } else if (value is double) {
     return doubleDataRepresentation(value);

@@ -13,7 +13,6 @@ dynamic parseToJson(Map values) {
     if (key == 'stringValue' ||
         key == 'integerValue' ||
         key == 'doubleValue' ||
-        key == 'timestampValue' ||
         key == 'booleanValue' ||
         key == 'geoPointValue' ||
         key == 'referenceValue') {
@@ -24,6 +23,8 @@ dynamic parseToJson(Map values) {
       return extractMapData(entry.value);
     } else if (key == 'nullValue') {
       return null;
+    } else if (key == 'timestampValue') {
+      return DateTime.parse(entry.value);
     } else {
       throw Exception(
           'Cannot convert this value to a json readable format. That sound like this value type $key is not supported by firestore.\nReceived data is $values');
