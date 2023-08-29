@@ -86,7 +86,7 @@ Map<String, dynamic> listDataRepresentation(List arrayValue) {
 Map<String, dynamic> stringDataRepresentation(String stringValue) => {'stringValue': stringValue};
 
 @visibleForTesting
-Map<String, dynamic> intDataRepresentation(int integerValue) => {'integerValue': integerValue};
+Map<String, dynamic> intDataRepresentation(int integerValue) => {'integerValue': '$integerValue'};
 
 @visibleForTesting
 Map<String, dynamic> doubleDataRepresentation(double doubleValue) => {'doubleValue': doubleValue};

@@ -11,12 +11,13 @@ dynamic parseToJson(Map values) {
   for (var entry in values.entries) {
     final key = entry.key;
     if (key == 'stringValue' ||
-        key == 'integerValue' ||
         key == 'doubleValue' ||
         key == 'booleanValue' ||
         key == 'geoPointValue' ||
         key == 'referenceValue') {
       return entry.value;
+    } else if (key == 'integerValue') {
+      return int.parse(entry.value.toString());
     } else if (key == 'arrayValue') {
       return extractArrayData(entry.value);
     } else if (key == 'mapValue') {
